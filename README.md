@@ -1,7 +1,9 @@
 tendrl-selinux
 ==============
 
-SELinux support for Tendrl.
+This is [independent SELinux
+policy](https://fedoraproject.org/wiki/SELinux/IndependentPolicy) for
+[Tendrl](http://tendrl.org/).
 
 ## License
 
