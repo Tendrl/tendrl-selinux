@@ -1,4 +1,4 @@
-policy_module(tendrl, 1.0.0)
+policy_module(tendrl_server, 1.0.0)
 
 ########################################
 #
