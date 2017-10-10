@@ -3,3 +3,7 @@
 *~
 # SELinux
 *.pp
+*.tc
+*.pp.bz2
+*.tar.gz
+tmp
