@@ -1,8 +1,8 @@
-TARGET?=tendrl
-MODULES?=${TARGET:=.pp.bz2}
+TARGETS?=tendrl carbon grafana collectd
+MODULES?=${TARGETS:=.pp.bz2}
 SHAREDIR?=/usr/share
 
-all: ${TARGET:=.pp.bz2}
+all: ${TARGETS:=.pp.bz2}
 
 %.pp.bz2: %.pp
 	@echo Compressing $^ -\> $@
@@ -14,14 +14,3 @@ all: ${TARGET:=.pp.bz2}
 clean:
 	rm -f *~  *.tc *.pp *.pp.bz2
 	rm -rf tmp *.tar.gz
-
-man: install-policy
-	sepolicy manpage --path . --domain ${TARGET}_t
-
-install-policy: all
-	semodule -i ${TARGET}.pp.bz2
-
-install: man
-	install -D -m 644 ${TARGET}.pp.bz2 ${DESTDIR}${SHAREDIR}/selinux/packages/${TARGET}.pp.bz2
-	install -D -m 644 ${TARGET}.if ${DESTDIR}${SHAREDIR}/selinux/devel/include/contrib/${TARGET}.if
-	install -D -m 644 ${TARGET}_selinux.8 ${DESTDIR}${SHAREDIR}/man/man8/
