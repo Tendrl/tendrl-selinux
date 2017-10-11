@@ -1,6 +1,6 @@
 TARGETS?=tendrl carbon grafana collectd
 MODULES?=${TARGETS:=.pp.bz2}
-SHAREDIR?=/usr/share
+DATADIR?=/usr/share
 
 all: ${TARGETS:=.pp.bz2}
 
@@ -9,7 +9,7 @@ all: ${TARGETS:=.pp.bz2}
 	bzip2 -9 $^
 
 %.pp: %.te
-	make -f ${SHAREDIR}/selinux/devel/Makefile $@
+	make -f ${DATADIR}/selinux/devel/Makefile $@
 
 clean:
 	rm -f *~  *.tc *.pp *.pp.bz2

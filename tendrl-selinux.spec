@@ -37,7 +37,7 @@ SELinux policy modules for Tendrl.
 %setup -q
 
 %build
-make SHAREDIR="%{_datadir}" TARGETS="%{modulenames}"
+make DATADIR="%{_datadir}" TARGETS="%{modulenames}"
 
 %pre
 %selinux_relabel_pre -s %{selinuxtype}
