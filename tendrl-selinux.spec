@@ -90,5 +90,5 @@ fi
 %license  %{_pkgdocdir}/LICENSE
 
 %changelog
-* Wed Oct 11 2017 Martin Bukatovič <mbukatov@redhat.com> - 1.5.3-1
-- First Build
+* Thu Oct 12 2017 Martin Bukatovič <mbukatov@redhat.com> - 1.5.3-1
+- First build of Tendrl SELinux policies
