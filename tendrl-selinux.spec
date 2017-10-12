@@ -2,7 +2,7 @@
 %global selinuxtype        targeted
 %global selinux_policyver  3.13.1-166
 %global moduletype         services
-%global modulenames        tendrl carbon grafana collectd
+%global modulenames        tendrl carbon collectd grafana
 
 # Usage: _format var format
 #   Expand 'modulenames' into various formats as needed
@@ -12,7 +12,7 @@
 Name:           tendrl-selinux
 Version:        1.5.3
 Release:        1%{?dist}
-Summary:        SELinux policies for Tendrl
+Summary:        SELinux policy for Tendrl
 
 License:        LGPLv2.1
 Url:            https://github.com/Tendrl/tendrl-selinux
@@ -31,7 +31,40 @@ Requires(post): policycoreutils
 Requires(post): policycoreutils-python
 
 %description
-SELinux policy modules for Tendrl.
+SELinux policy module for Tendrl.
+
+%package -n carbon-selinux
+Summary:        SELinux policy for Carbon
+Requires:       selinux-policy >= %{selinux_policyver}
+Requires(post): selinux-policy-base >= %{selinux_policyver}
+Requires(post): libselinux-utils
+Requires(post): policycoreutils
+Requires(post): policycoreutils-python
+
+%description -n carbon-selinux
+SELinux policy module for Carbon.
+
+%package -n tendrl-collectd-selinux
+Summary:        SELinux policy for Tendrl Collectd
+Requires:       selinux-policy >= %{selinux_policyver}
+Requires(post): selinux-policy-base >= %{selinux_policyver}
+Requires(post): libselinux-utils
+Requires(post): policycoreutils
+Requires(post): policycoreutils-python
+
+%description -n tendrl-collectd-selinux
+SELinux policy module for Tendrl Collectd.
+
+%package -n tendrl-grafana-selinux
+Summary:        SELinux policy for Tendrl Grafana
+Requires:       selinux-policy >= %{selinux_policyver}
+Requires(post): selinux-policy-base >= %{selinux_policyver}
+Requires(post): libselinux-utils
+Requires(post): policycoreutils
+Requires(post): policycoreutils-python
+
+%description -n tendrl-grafana-selinux
+SELinux policy module for Tendrl Grafana.
 
 %prep
 %setup -q
@@ -63,19 +96,35 @@ install -p -m 644 LICENSE      %{buildroot}%{_pkgdocdir}/LICENSE
 %check
 
 %post
-# TODO: is it possible to loop over %{modulenames} variable?
 %selinux_modules_install -s %{selinuxtype} %{_datadir}/selinux/packages/tendrl
+
+%post -n carbon-selinux
 %selinux_modules_install -s %{selinuxtype} %{_datadir}/selinux/packages/carbon
-%selinux_modules_install -s %{selinuxtype} %{_datadir}/selinux/packages/grafana
+
+%post -n tendrl-collectd-selinux
 %selinux_modules_install -s %{selinuxtype} %{_datadir}/selinux/packages/collectd
+
+%post -n tendrl-grafana-selinux
+%selinux_modules_install -s %{selinuxtype} %{_datadir}/selinux/packages/grafana
 
 %postun
 if [ $1 -eq 0 ]; then
-    # TODO: is it possible to loop over %{modulenames} variable?
     %selinux_modules_uninstall -s %{selinuxtype} tendrl
+fi
+
+%postun -n carbon-selinux
+if [ $1 -eq 0 ]; then
     %selinux_modules_uninstall -s %{selinuxtype} carbon
-    %selinux_modules_uninstall -s %{selinuxtype} grafana
+fi
+
+%postun -n tendrl-collectd-selinux
+if [ $1 -eq 0 ]; then
     %selinux_modules_uninstall -s %{selinuxtype} collectd
+fi
+
+%postun -n tendrl-grafana-selinux
+if [ $1 -eq 0 ]; then
+    %selinux_modules_uninstall -s %{selinuxtype} grafana
 fi
 
 %posttrans
@@ -83,11 +132,23 @@ fi
 
 %files
 %defattr(-,root,root,0755)
-%attr(0644,root,root) %{_datadir}/selinux/packages/*.pp.bz2
-%attr(0644,root,root) %{_datadir}/selinux/devel/include/%{moduletype}/*.if
+%attr(0644,root,root) %{_datadir}/selinux/packages/tendrl.pp.bz2
+%attr(0644,root,root) %{_datadir}/selinux/devel/include/%{moduletype}/tendrl.if
 # readme and license files
 %doc      %{_pkgdocdir}/README.md
 %license  %{_pkgdocdir}/LICENSE
+
+%files -n carbon-selinux
+%attr(0644,root,root) %{_datadir}/selinux/packages/carbon.pp.bz2
+%attr(0644,root,root) %{_datadir}/selinux/devel/include/%{moduletype}/carbon.if
+
+%files -n tendrl-collectd-selinux
+%attr(0644,root,root) %{_datadir}/selinux/packages/collectd.pp.bz2
+%attr(0644,root,root) %{_datadir}/selinux/devel/include/%{moduletype}/collectd.if
+
+%files -n tendrl-grafana-selinux
+%attr(0644,root,root) %{_datadir}/selinux/packages/grafana.pp.bz2
+%attr(0644,root,root) %{_datadir}/selinux/devel/include/%{moduletype}/grafana.if
 
 %changelog
 * Thu Oct 12 2017 Martin Bukatovič <mbukatov@redhat.com> - 1.5.3-1

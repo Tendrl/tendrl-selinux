@@ -1,4 +1,4 @@
-TARGETS?=tendrl carbon grafana collectd
+TARGETS?=tendrl carbon collectd grafana
 MODULES?=${TARGETS:=.pp.bz2}
 DATADIR?=/usr/share
 
