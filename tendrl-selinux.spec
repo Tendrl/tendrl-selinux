@@ -70,7 +70,7 @@ SELinux policy module for Tendrl Grafana.
 %setup -q
 
 %build
-make DATADIR="%{_datadir}" TARGETS="%{modulenames}"
+make DATADIR="%{_datadir}" TARGETS="%{modulenames}" modules
 
 %pre
 %selinux_relabel_pre -s %{selinuxtype}
