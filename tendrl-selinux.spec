@@ -10,7 +10,7 @@
 %global _format() export %1=""; for x in %{modulenames}; do %1+=%2; %1+=" "; done;
 
 Name:           tendrl-selinux
-Version:        1.5.3
+Version:        1.5.4
 Release:        1%{?dist}
 Summary:        SELinux policy for Tendrl
 
@@ -151,5 +151,8 @@ fi
 %attr(0644,root,root) %{_datadir}/selinux/devel/include/%{moduletype}/grafana.if
 
 %changelog
+* Fri Nov 24 2017 Rohan Kanade <rkanade@redhat.com> - 1.5.4-1
+- tendrl-selinux 1.5.4
+
 * Thu Oct 12 2017 Martin Bukatovič <mbukatov@redhat.com> - 1.5.3-1
 - First build of Tendrl SELinux policies
