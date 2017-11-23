@@ -96,16 +96,16 @@ install -p -m 644 LICENSE      %{buildroot}%{_pkgdocdir}/LICENSE
 %check
 
 %post
-%selinux_modules_install -s %{selinuxtype} %{_datadir}/selinux/packages/tendrl
+%selinux_modules_install -s %{selinuxtype} %{_datadir}/selinux/packages/tendrl.pp.bz2
 
 %post -n carbon-selinux
-%selinux_modules_install -s %{selinuxtype} %{_datadir}/selinux/packages/carbon
+%selinux_modules_install -s %{selinuxtype} %{_datadir}/selinux/packages/carbon.pp.bz2
 
 %post -n tendrl-collectd-selinux
-%selinux_modules_install -s %{selinuxtype} %{_datadir}/selinux/packages/collectd
+%selinux_modules_install -s %{selinuxtype} %{_datadir}/selinux/packages/collectd.pp.bz2
 
 %post -n tendrl-grafana-selinux
-%selinux_modules_install -s %{selinuxtype} %{_datadir}/selinux/packages/grafana
+%selinux_modules_install -s %{selinuxtype} %{_datadir}/selinux/packages/grafana.pp.bz2
 
 %postun
 if [ $1 -eq 0 ]; then
