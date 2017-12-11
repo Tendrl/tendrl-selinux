@@ -11,7 +11,7 @@
 
 Name:           tendrl-selinux
 Version:        1.5.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        SELinux policy for Tendrl
 
 License:        LGPLv2.1
@@ -151,6 +151,9 @@ fi
 %attr(0644,root,root) %{_datadir}/selinux/devel/include/%{moduletype}/grafana.if
 
 %changelog
+* Mon Dec 11 2017 Rohan Kanade <rkanade@redhat.com> - 1.5.4-2
+- Fix /var/log/tendrl/* perms
+
 * Fri Nov 24 2017 Rohan Kanade <rkanade@redhat.com> - 1.5.4-1
 - tendrl-selinux 1.5.4
 
