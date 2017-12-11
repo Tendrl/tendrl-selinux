@@ -13,4 +13,4 @@
 
 /var/lib/tendrl(/.*)?		gen_context(system_u:object_r:tendrl_var_lib_t,s0)
 
-/var/log/tendrl(/.*)?		gen_context(system_u:object_r:tendrl_log_t,s0)
+/var/log/tendrl/api(/.*)?	gen_context(system_u:object_r:tendrl_log_t,s0)
